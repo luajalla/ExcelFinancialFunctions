@@ -5,13 +5,15 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("ExcelFinancialFunctions")>]
 [<assembly: AssemblyProductAttribute("ExcelFinancialFunctions")>]
 [<assembly: AssemblyDescriptionAttribute("A .NET library that provides the full set of financial functions from Excel.")>]
-[<assembly: AssemblyVersionAttribute("2.4")>]
-[<assembly: AssemblyFileVersionAttribute("2.4")>]
+[<assembly: AssemblyVersionAttribute("2.5")>]
+[<assembly: AssemblyFileVersionAttribute("2.5")>]
+[<assembly: AssemblyConfigurationAttribute("Release")>]
 do ()
 
 module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "ExcelFinancialFunctions"
     let [<Literal>] AssemblyProduct = "ExcelFinancialFunctions"
     let [<Literal>] AssemblyDescription = "A .NET library that provides the full set of financial functions from Excel."
-    let [<Literal>] AssemblyVersion = "2.4"
-    let [<Literal>] AssemblyFileVersion = "2.4"
+    let [<Literal>] AssemblyVersion = "2.5"
+    let [<Literal>] AssemblyFileVersion = "2.5"
+    let [<Literal>] AssemblyConfiguration = "Release"
