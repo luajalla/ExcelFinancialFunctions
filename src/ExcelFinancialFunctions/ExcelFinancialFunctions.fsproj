@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <DocumentationFile>ExcelFinancialFunctions.XML</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="publicenums.fs" />
@@ -19,5 +22,4 @@
     <Compile Include="wrapperdotnettype.fs" />
     <Compile Include="testpreconditions.fs" />
   </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

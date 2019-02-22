@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tvm - ExcelFinancialFunctions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+    <script src="http://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="http://fsprojects.github.io/ExcelFinancialFunctions//content/style.css" />
+    <script type="text/javascript" src="http://fsprojects.github.io/ExcelFinancialFunctions//content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="https://github.com/fsprojects/ExcelFinancialFunctions">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="http://fsprojects.github.io/ExcelFinancialFunctions//index.html">ExcelFinancialFunctions</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Tvm</h1>
+<p>
+  <span>Namespace: Excel.FinancialFunctions</span><br />
+  </p>
+<div class="xmldoc">
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '19', 19)" onmouseover="showTip(event, '19', 19)">
+            annuityCertainFvFactor r nper pd
+          </code>
+          <div class="tip" id="19">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; nper:float&lt;MeasureOne&gt; -&gt; pd:PaymentDue -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L14-14" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
+            annuityCertainPvFactor r nper pd
+          </code>
+          <div class="tip" id="20">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; nper:float&lt;MeasureOne&gt; -&gt; pd:PaymentDue -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L13-13" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
+            calcFv r nper pmt pv pd
+          </code>
+          <div class="tip" id="21">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; nper:float -&gt; pmt:float&lt;MeasureOne&gt; -&gt; pv:float&lt;MeasureOne&gt; -&gt; pd:PaymentDue -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L28-28" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '22', 22)" onmouseover="showTip(event, '22', 22)">
+            calcFvSchedule pv interests
+          </code>
+          <div class="tip" id="22">
+            <strong>Signature:</strong> pv:float -&gt; interests:seq&lt;float&lt;MeasureOne&gt;&gt; -&gt; float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L63-63" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '23', 23)" onmouseover="showTip(event, '23', 23)">
+            calcNper r pmt pv fv pd
+          </code>
+          <div class="tip" id="23">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; pmt:float&lt;MeasureOne&gt; -&gt; pv:float -&gt; fv:float -&gt; pd:PaymentDue -&gt; float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L42-42" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '24', 24)" onmouseover="showTip(event, '24', 24)">
+            calcPmt r nper pv fv pd
+          </code>
+          <div class="tip" id="24">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; nper:float -&gt; pv:float&lt;MeasureOne&gt; -&gt; fv:float&lt;MeasureOne&gt; -&gt; pd:PaymentDue -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L35-35" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '25', 25)" onmouseover="showTip(event, '25', 25)">
+            calcPv r nper pmt fv pd
+          </code>
+          <div class="tip" id="25">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; nper:float -&gt; pmt:float&lt;MeasureOne&gt; -&gt; fv:float&lt;MeasureOne&gt; -&gt; pd:PaymentDue -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L23-23" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '26', 26)" onmouseover="showTip(event, '26', 26)">
+            calcRate nper pmt pv fv pd guess
+          </code>
+          <div class="tip" id="26">
+            <strong>Signature:</strong> nper:float&lt;MeasureOne&gt; -&gt; pmt:float&lt;MeasureOne&gt; -&gt; pv:float&lt;MeasureOne&gt; -&gt; fv:float -&gt; pd:PaymentDue -&gt; guess:float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L47-47" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '27', 27)" onmouseover="showTip(event, '27', 27)">
+            fv r nper pmt pv pd
+          </code>
+          <div class="tip" id="27">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; nper:float&lt;MeasureOne&gt; -&gt; pmt:float&lt;MeasureOne&gt; -&gt; pv:float&lt;MeasureOne&gt; -&gt; pd:PaymentDue -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L18-18" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '28', 28)" onmouseover="showTip(event, '28', 28)">
+            fvFactor r nper
+          </code>
+          <div class="tip" id="28">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; nper:float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L11-11" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '29', 29)" onmouseover="showTip(event, '29', 29)">
+            nper r pmt pv fv pd
+          </code>
+          <div class="tip" id="29">
+            <strong>Signature:</strong> r:float -&gt; pmt:float&lt;MeasureOne&gt; -&gt; pv:float -&gt; fv:float -&gt; pd:PaymentDue -&gt; float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L20-20" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '30', 30)" onmouseover="showTip(event, '30', 30)">
+            nperFactor r pmt v pd
+          </code>
+          <div class="tip" id="30">
+            <strong>Signature:</strong> r:float -&gt; pmt:float&lt;MeasureOne&gt; -&gt; v:float -&gt; pd:PaymentDue -&gt; float<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L15-15" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '31', 31)" onmouseover="showTip(event, '31', 31)">
+            pmt r nper pv fv pd
+          </code>
+          <div class="tip" id="31">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; nper:float&lt;MeasureOne&gt; -&gt; pv:float&lt;MeasureOne&gt; -&gt; fv:float&lt;MeasureOne&gt; -&gt; pd:PaymentDue -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L19-19" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '32', 32)" onmouseover="showTip(event, '32', 32)">
+            pv r nper pmt fv pd
+          </code>
+          <div class="tip" id="32">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; nper:float&lt;MeasureOne&gt; -&gt; pmt:float&lt;MeasureOne&gt; -&gt; fv:float&lt;MeasureOne&gt; -&gt; pd:PaymentDue -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L17-17" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '33', 33)" onmouseover="showTip(event, '33', 33)">
+            pvFactor r nper
+          </code>
+          <div class="tip" id="33">
+            <strong>Signature:</strong> r:float&lt;MeasureOne&gt; -&gt; nper:float&lt;MeasureOne&gt; -&gt; float&lt;MeasureOne&gt;<br />
+                                  </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/fsprojects/ExcelFinancialFunctions/tree/master/src/ExcelFinancialFunctions/tvm.fs#L12-12" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+	  <a href="https://nuget.org/packages/ExcelFinancialFunctions">
+            <img src="http://fsprojects.github.io/ExcelFinancialFunctions//img/logo.png" style="width:140px;height:140px;margin:10px 0px 0px 35px;border-style:none;" />
+          </a>
+
+          <ul class="nav nav-list" id="menu">
+            <li class="nav-header">ExcelFinancialFunctions</li>
+            <li><a href="http://fsprojects.github.io/ExcelFinancialFunctions//index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/ExcelFinancialFunctions">Get Library via NuGet</a></li>
+            <li><a href="https://github.com/fsprojects/ExcelFinancialFunctions">Source Code on GitHub</a></li>
+            <li><a href="https://github.com/fsprojects/ExcelFinancialFunctions/blob/master/LICENSE.txt">License</a></li>
+            <li><a href="https://github.com/fsprojects/ExcelFinancialFunctions/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+            
+            <li class="nav-header">Documentation</li>
+            <li><a href="http://fsprojects.github.io/ExcelFinancialFunctions//reference/index.html">API Reference</a></li>
+            <li><a href="http://fsprojects.github.io/ExcelFinancialFunctions//compatibility.html">Excel Compatibility</a></li>
+            <li><a href="http://fsprojects.github.io/ExcelFinancialFunctions//openofficediff.html">OpenOffice Differences</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="https://github.com/fsprojects/ExcelFinancialFunctions"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+  </body>
+  </html>

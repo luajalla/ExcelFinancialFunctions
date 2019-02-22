@@ -1,11 +1,11 @@
-// --------------------------------------------------------------------------------------
-// FAKE build script
-// --------------------------------------------------------------------------------------
+#r "paket: groupref Build //"
+#load ".fake/build.fsx/intellisense.fsx"
 
-#r "paket: groupref FakeBuild //"
+#if !FAKE
+#r "netstandard"
+#endif
 
-#load "./.fake/build.fsx/intellisense.fsx"
-
+open System  
 open System.IO
 open Fake.Core
 open Fake.Core.TargetOperators
@@ -13,9 +13,16 @@ open Fake.DotNet
 open Fake.IO
 open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
-open Fake.DotNet.Testing
+open Fake.SystemHelper
 open Fake.Tools
+
 open Fake.Api
+open Fake.BuildServer
+
+BuildServer.install [
+    AppVeyor.Installer
+    Travis.Installer
+]
 
 // Information about the project are used
 //  - for version and project name in generated AssemblyInfo file
@@ -48,20 +55,16 @@ let solutionFile  = "ExcelFinancialFunctions.sln"
 // Default target configuration
 let configuration = "Release"
 
-// Pattern specifying assemblies to be tested using Expecto
-let testAssemblies = "tests/**/bin" </> configuration </> "**" </> "*Tests.dll"
+// Pattern specifying assemblies to be tested
+// let testAssemblies = "tests/**/bin" </> configuration </> "**" </> "*Tests.dll"
+let testAssemblies = "tests/**/*.??proj"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
 let gitOwner = "fsprojects"
-let gitHome = "https://github.com/" + gitOwner
 
 // The name of the project on GitHub
 let gitName = "ExcelFinancialFunctions"
-
-// The url for the raw files hosted
-let gitRaw = Environment.environVarOrDefault "gitRaw" "https://raw.githubusercontent.com/fsprojects"
-
 let website = "http://fsprojects.github.io/ExcelFinancialFunctions/"
 
 
@@ -76,6 +79,17 @@ let (|Fsproj|Csproj|Vbproj|Shproj|) (projFileName:string) =
     | f when f.EndsWith("vbproj") -> Vbproj
     | f when f.EndsWith("shproj") -> Shproj
     | _                           -> failwith (sprintf "Project file %s not supported. Unknown project type." projFileName)
+
+let isRelease (targets : Target list) =
+    targets
+    |> Seq.map(fun t -> t.Name)
+    |> Seq.exists ((=)"Release")
+
+let dotNetConfiguration =
+    match configuration with
+    | "Debug"   -> DotNet.BuildConfiguration.Debug
+    | "Release" -> DotNet.BuildConfiguration.Release
+    | config    -> DotNet.BuildConfiguration.Custom config
 
 // Generate assembly info files with the right version & up-to-date information
 Target.create "AssemblyInfo" (fun _ ->
@@ -119,8 +133,6 @@ Target.create "CopyBinaries" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Clean build results
 
-let buildConfiguration = DotNet.Custom <| Environment.environVarOrDefault "configuration" configuration
-
 Target.create "Clean" (fun _ ->
     Shell.cleanDirs ["bin"; "temp"]
 )
@@ -137,48 +149,30 @@ Target.create "Restore" (fun _ ->
     |> DotNet.restore id
 )
 
-Target.create "Build" (fun _ ->
-    (*solutionFile
-    |> DotNet.build (fun p ->
-        { p with
-            Configuration = buildConfiguration })*)
-    let setParams (defaults:MSBuildParams) =
-        { defaults with
-            Verbosity = Some(Quiet)
-            Targets = ["Build"]
-            Properties =
-                [
-                    "Optimize", "True"
-                    "DebugSymbols", "True"
-                    "Configuration", configuration
-                ]
-         }
-    MSBuild.build setParams solutionFile
+Target.create "Build" (fun ctx ->
+    let args =
+        [
+            "/p:PackageVersion="   + release.NugetVersion
+            "/p:SourceLinkCreate=" + string (isRelease ctx.Context.AllExecutingTargets)
+            "--no-restore"
+        ] |> String.concat " "
+
+    solutionFile
+    |> DotNet.build (fun c ->
+        { c with
+            Configuration = dotNetConfiguration
+            Common        = DotNet.Options.withCustomParams (Some args) c.Common })
 )
 
 // --------------------------------------------------------------------------------------
-// Run the unit tests using test runner
-
-Target.create "RunTests" (fun _ ->
-    let assemblies = !! testAssemblies
-
-    let setParams f =
-        match Environment.isWindows with
-        | true ->
-            fun p ->
-                { p with
-                    FileName = f}
-        | false ->
-            fun p ->
-                { p with
-                    FileName = "mono"
-                    Arguments = f }
-    assemblies
-    |> Seq.map (fun f ->
-        Process.execSimple (setParams f) System.TimeSpan.MaxValue
-    )
-    |>Seq.reduce (+)
-    |> (fun i -> if i > 0 then failwith "")
+Target.create "RunTests" (fun ctx ->
+    !! testAssemblies
+    |> Seq.iter (fun proj ->
+        proj
+        |> DotNet.test (fun c ->
+            { c with
+                Configuration = dotNetConfiguration
+                Common        = DotNet.Options.withCustomParams (Some "--no-build") c.Common }))
 )
 
 // --------------------------------------------------------------------------------------
@@ -187,8 +181,8 @@ Target.create "RunTests" (fun _ ->
 Target.create "NuGet" (fun _ ->
     Paket.pack(fun p ->
         { p with
-            OutputPath = "bin"
-            Version = release.NugetVersion
+            OutputPath   = "bin"
+            Version      = release.NugetVersion
             ReleaseNotes = String.toLines release.Notes})
 )
 
@@ -217,11 +211,11 @@ let githubLink = sprintf "https://github.com/%s/%s" github_release_user gitName
 
 // Specify more information about your project
 let info =
-  [ "project-name", "ExcelFinancialFunctions"
-    "project-author", "Luca Bolognese"
+  [ "project-name",    project
+    "project-author",  String.separated ", " authors 
     "project-summary", "A .NET library that provides the full set of financial functions from Excel."
-    "project-github", githubLink
-    "project-nuget", "http://nuget.org/packages/ExcelFinancialFunctions" ]
+    "project-github",  githubLink
+    "project-nuget",  "http://nuget.org/packages/ExcelFinancialFunctions" ]
 
 let root = website
 
@@ -241,35 +235,27 @@ Target.create "ReferenceDocs" (fun _ ->
             |> List.map (fun b -> bin @@ b)
 
         let conventionBased =
-            DirectoryInfo.getSubDirectories <| DirectoryInfo bin
-            |> Array.collect (fun d ->
-                let name, dInfo =
-                    let net45Bin =
-                        DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("net45"))
-                    let net47Bin =
-                        DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("net47"))
-                    if net45Bin.Length > 0 then
-                        d.Name, net45Bin.[0]
-                    else
-                        d.Name, net47Bin.[0]
+            DirectoryInfo bin
+            |> DirectoryInfo.getSubDirectories
+            |> Array.choose (fun d ->
+                let subDirs = DirectoryInfo.getSubDirectories d
 
-                dInfo.GetFiles()
-                |> Array.filter (fun x ->
-                    x.Name.ToLower() = (sprintf "%s.dll" name).ToLower())
-                |> Array.map (fun x -> x.FullName)
-                )
+                if subDirs.Length > 0 then
+                    let dllName = (d.Name + ".dll").ToLower()
+                    subDirs.[0].GetFiles()
+                    |> Array.tryPick (fun x -> if x.Name.ToLower() = dllName then Some x.FullName else None)
+                else None)
             |> List.ofArray
 
         conventionBased @ manuallyAdded
-
+    
     binaries()
     |> FSFormatting.createDocsForDlls (fun args ->
         { args with
-            OutputDirectory = output @@ "reference"
-            LayoutRoots =  layoutRootsAll.["en"]
-            ProjectParameters =  ("root", root)::info
-            SourceRepository = githubLink @@ "tree/master" }
-           )
+            OutputDirectory   = output @@ "reference"
+            LayoutRoots       = layoutRootsAll.["en"]
+            ProjectParameters = ("root", root) :: info
+            SourceRepository  = githubLink @@ "tree/master" })
 )
 
 let copyFiles () =
@@ -279,24 +265,24 @@ let copyFiles () =
     Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true
     |> Trace.logItems "Copying styles and scripts: "
 
+
 Target.create "Docs" (fun _ ->
-    File.delete "docsrc/content/release-notes.md"
+    File.delete    "docsrc/content/release-notes.md"
     Shell.copyFile "docsrc/content/" "RELEASE_NOTES.md"
-    Shell.rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
+    Shell.rename   "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
 
-    File.delete "docsrc/content/license.md"
+    File.delete    "docsrc/content/license.md"
     Shell.copyFile "docsrc/content/" "LICENSE.txt"
-    Shell.rename "docsrc/content/license.md" "docsrc/content/LICENSE.txt"
-
+    Shell.rename   "docsrc/content/license.md" "docsrc/content/LICENSE.txt"
 
     DirectoryInfo.getSubDirectories (DirectoryInfo.ofPath templates)
     |> Seq.iter (fun d ->
-                    let name = d.Name
-                    if name.Length = 2 || name.Length = 3 then
-                        layoutRootsAll.Add(
-                                name, [templates @@ name
-                                       formatting @@ "templates"
-                                       formatting @@ "templates/reference" ]))
+        let name = d.Name
+        if name.Length = 2 || name.Length = 3 then
+            layoutRootsAll.Add(
+                name, [ templates  @@ name
+                        formatting @@ "templates"
+                        formatting @@ "templates/reference" ]))
     copyFiles ()
 
     for dir in  [ content; ] do
@@ -307,7 +293,7 @@ Target.create "Docs" (fun _ ->
             let key = layoutRootsAll.Keys |> Seq.tryFind (fun i -> langSpecificPath(i, dir))
             match key with
             | Some lang -> layoutRootsAll.[lang]
-            | None -> layoutRootsAll.["en"] // "en" is the default language
+            | None      -> layoutRootsAll.["en"] // "en" is the default language
 
         FSFormatting.createDocs (fun args ->
             { args with
@@ -363,4 +349,4 @@ Target.create "All" ignore
   ==> "PublishNuget"
   ==> "Release"
 
-Target.runOrDefault "All"
+Target.runOrDefaultWithArguments "All"

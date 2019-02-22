@@ -1,0 +1,13 @@
+<Project>
+    <PropertyGroup>
+        <!-- summary is not migrated from project.json, but you can use the <Description> property for that if needed. -->
+        <PackageTags>f#, fsharp, csharp, excel, finance</PackageTags>
+        <PackageProjectUrl>https://github.com/fsprojects/ExcelFinancialFunctions</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/fsprojects/ExcelFinancialFunctions/blob/master/LICENSE.txt</PackageLicenseUrl>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <RepositoryType>git</RepositoryType>
+        <Authors>fsprojects</Authors>
+        <RepositoryUrl>https://github.com/fsprojects/ExcelFinancialFunctions</RepositoryUrl>
+        <!-- owners is not supported in MSBuild -->
+    </PropertyGroup>
+</Project>

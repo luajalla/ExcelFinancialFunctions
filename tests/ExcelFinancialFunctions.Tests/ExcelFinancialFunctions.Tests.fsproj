@@ -3,13 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <IsPackable>false</IsPackable>
-    <OutputType>Exe</OutputType>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="testutils.fs" />
     <Compile Include="spottests.fs" />
     <Compile Include="crosstests.fs" />
     <Compile Include="concurrencytests.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="nunit" Version="3.10.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\ExcelFinancialFunctions\ExcelFinancialFunctions.fsproj" />
