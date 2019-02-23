@@ -12,10 +12,9 @@ nuget FSharp.Core ~> 4.5
 
 // [ FAKE GROUP ]
 group Build
-
-    storage: none
     source https://www.nuget.org/api/v2
     source https://api.nuget.org/v3/index.json
+    storage: none
     nuget Fake.IO.FileSystem
     nuget Fake.Core.Target
     nuget Fake.Core.ReleaseNotes

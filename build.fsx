@@ -329,7 +329,7 @@ Target.create "All" ignore
   ==> "Build"
   ==> "CopyBinaries"
   ==> "RunTests"
-  ==> "GenerateDocs"
+  // ==> "GenerateDocs"  // Generating docs needs to be fixed.
   ==> "NuGet"
   ==> "All"
 
@@ -337,7 +337,7 @@ Target.create "All" ignore
 
 "CleanDocs"
   ==> "Docs"
-  // ==> "ReferenceDocs" // API reference is excluded for now because generated documentation is incomplete.
+  ==> "ReferenceDocs"
   ==> "GenerateDocs"
 
 "Clean"
