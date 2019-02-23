@@ -67,7 +67,6 @@ let gitOwner = "fsprojects"
 let gitName = "ExcelFinancialFunctions"
 let website = "http://fsprojects.github.io/ExcelFinancialFunctions/"
 
-
 // Read additional information from the release notes document
 let release = ReleaseNotes.load "RELEASE_NOTES.md"
 
@@ -307,7 +306,6 @@ Target.create "Docs" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Release Scripts
 
-
 Target.create "Release" (fun _ ->
     Git.Staging.stageAll ""
     Git.Commit.exec "" (sprintf "Bump version to %s" release.NugetVersion)
@@ -339,7 +337,7 @@ Target.create "All" ignore
 
 "CleanDocs"
   ==> "Docs"
-  ==> "ReferenceDocs"
+  // ==> "ReferenceDocs" // API reference is excluded for now because generated documentation is incomplete.
   ==> "GenerateDocs"
 
 "Clean"

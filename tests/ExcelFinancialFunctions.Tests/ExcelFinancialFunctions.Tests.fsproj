@@ -10,6 +10,7 @@
     <Compile Include="spottests.fs" />
     <Compile Include="crosstests.fs" />
     <Compile Include="concurrencytests.fs" />
+    <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="nunit" Version="3.10.1" />

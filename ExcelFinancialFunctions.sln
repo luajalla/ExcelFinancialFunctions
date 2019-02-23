@@ -6,15 +6,16 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{4BAF619C-274D-4FCB-96CF-A163FC58EF51}"
 	ProjectSection(SolutionItems) = preProject
 		paket.dependencies = paket.dependencies
+		paket.template = paket.template
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ExcelFinancialFunctions", "src\ExcelFinancialFunctions\ExcelFinancialFunctions.fsproj", "{58DEFA2B-5A68-4A6F-BAFD-C85DA60AE564}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ExcelFinancialFunctions", "src\ExcelFinancialFunctions\ExcelFinancialFunctions.fsproj", "{58DEFA2B-5A68-4A6F-BAFD-C85DA60AE564}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1031EC4-3F03-45D4-963B-B94F452DD1D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9F01369C-9E75-42E1-8CDE-B3E739AD79FD}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ExcelFinancialFunctions.Tests", "tests\ExcelFinancialFunctions.Tests\ExcelFinancialFunctions.Tests.fsproj", "{C0074882-AC75-4EE4-9AFA-82A8375DAD23}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ExcelFinancialFunctions.Tests", "tests\ExcelFinancialFunctions.Tests\ExcelFinancialFunctions.Tests.fsproj", "{C0074882-AC75-4EE4-9AFA-82A8375DAD23}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{9B8CEAFC-0AD3-41F9-8055-D25FCA00B1B9}"
 	ProjectSection(SolutionItems) = preProject

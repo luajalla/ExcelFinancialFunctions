@@ -8,7 +8,7 @@ clitool dotnet-mono 0.5.2
 clitool dotnet-sourcelink 2.8.1
 clitool dotnet-fantomas 2.8.0
 clitool dotnet-reportgenerator-cli 4.0.0-rc4
-nuget FSharp.Core 4.6.2
+nuget FSharp.Core ~> 4.5
 
 // [ FAKE GROUP ]
 group Build
@@ -42,6 +42,6 @@ group Test
     storage: none
 
     nuget FsCheck.NUnit 2.13.0
-    nuget Microsoft.NET.Test.Sdk 15.7.2
+    nuget Microsoft.NET.Test.Sdk 15.8.0
     nuget NUnit 3.10.1
     nuget NUnit3TestAdapter 3.10.0    
